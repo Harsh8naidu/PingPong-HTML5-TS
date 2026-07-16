@@ -108,3 +108,18 @@ function create(this: Phaser.Scene) {
     ballBody.setVelocity(0,0);
 
 }
+
+type Controls = {
+
+    w: Phaser.Input.Keyboard.Key;
+
+    s: Phaser.Input.Keyboard.Key;
+
+    up: Phaser.Input.Keyboard.Key;
+
+    down: Phaser.Input.Keyboard.Key;
+
+};
+
+
+let keys: Controls;

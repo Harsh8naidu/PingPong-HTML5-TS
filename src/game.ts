@@ -44,6 +44,11 @@ let ball: Phaser.GameObjects.Arc;
 let scoreText: Phaser.GameObjects.Text;
 let messageText: Phaser.GameObjects.Text;
 
+let keys: Controls;
+
+let leftScore = 0;
+let rightScore = 0;
+
 function create(this: Phaser.Scene) {
 
 
@@ -107,6 +112,49 @@ function create(this: Phaser.Scene) {
 
     ballBody.setVelocity(0,0);
 
+    this.physics.add.collider(
+        ball,
+        leftPaddle
+    );
+
+
+    this.physics.add.collider(
+        ball,
+        rightPaddle
+    );
+
+
+    keys = {
+
+        w: this.input.keyboard!.addKey(
+            Phaser.Input.Keyboard.KeyCodes.W
+        ),
+
+        s: this.input.keyboard!.addKey(
+            Phaser.Input.Keyboard.KeyCodes.S
+        ),
+
+        up: this.input.keyboard!.addKey(
+            Phaser.Input.Keyboard.KeyCodes.UP
+        ),
+
+        down: this.input.keyboard!.addKey(
+            Phaser.Input.Keyboard.KeyCodes.DOWN
+        )
+
+    };
+
+
+    scoreText = this.add.text(
+        640,
+        50,
+        "0 : 0",
+        {
+            fontSize:"40px",
+            color:"#ffffff"
+        }
+
+    ).setOrigin(0.5);
 }
 
 type Controls = {
@@ -121,5 +169,30 @@ type Controls = {
 
 };
 
+function update() {
 
-let keys: Controls;
+    if(ball.x < 0){
+
+    rightScore++;
+    
+    // TODO:
+    //resetBall();
+
+    }
+
+
+    if(ball.x > 1280){
+
+        leftScore++;
+
+        // TODO:
+        // resetBall()
+        //resetBall();
+
+    }
+
+
+    scoreText.setText(
+        `${leftScore} : ${rightScore}`
+    );
+}

@@ -34,7 +34,6 @@ const config: Phaser.Types.Core.GameConfig = {
 
 };
 
-
 const game = new Phaser.Game(config);
 
 let leftPaddle: Phaser.GameObjects.Rectangle;
@@ -44,3 +43,68 @@ let ball: Phaser.GameObjects.Arc;
 
 let scoreText: Phaser.GameObjects.Text;
 let messageText: Phaser.GameObjects.Text;
+
+function create(this: Phaser.Scene) {
+
+
+    leftPaddle = this.add.rectangle(
+        50,
+        360,
+        20,
+        100,
+        0x0066ff
+    );
+
+
+    rightPaddle = this.add.rectangle(
+        1230,
+        360,
+        20,
+        100,
+        0xff3333
+    );
+
+
+    this.physics.add.existing(leftPaddle);
+    this.physics.add.existing(rightPaddle);
+
+
+    const leftBody = leftPaddle.body as Phaser.Physics.Arcade.Body;
+    leftBody.setImmovable(true);
+
+    const rightBody = rightPaddle.body as Phaser.Physics.Arcade.Body;
+    rightBody.setImmovable(true);
+
+    ball = this.add.circle(
+        640,
+        360,
+        10,
+        0xffffff
+    );
+
+
+    this.physics.add.existing(ball);
+
+
+    const ballBody =
+        ball.body as Phaser.Physics.Arcade.Body;
+
+
+    ballBody.setCollideWorldBounds(true);
+    ballBody.setBounce(1,1);
+
+    ballBody.setDrag(0,0);
+    ballBody.setDamping(false);
+
+
+    this.physics.world.setBoundsCollision(
+        false,
+        false,
+        true,
+        true
+    );
+
+
+    ballBody.setVelocity(0,0);
+
+}

@@ -33,7 +33,7 @@ const config: Phaser.Types.Core.GameConfig = {
 
 };
 
-const game = new Phaser.Game(config);
+new Phaser.Game(config);
 
 let leftPaddle: Phaser.GameObjects.Rectangle;
 let rightPaddle: Phaser.GameObjects.Rectangle;
@@ -230,7 +230,7 @@ function update() {
     if(ball.x < 0){
 
         rightScore++;
-        
+        checkGameOver();
         resetBall();
 
     }
@@ -239,7 +239,7 @@ function update() {
     if(ball.x > 1280){
 
         leftScore++;
-
+        checkGameOver();
         resetBall();
 
     }

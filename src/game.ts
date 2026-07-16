@@ -27,9 +27,8 @@ const config: Phaser.Types.Core.GameConfig = {
     },
 
     scene: {
-        // TODO
-        // create
-        // update
+        create,
+        update
     }
 
 };
@@ -45,6 +44,18 @@ let scoreText: Phaser.GameObjects.Text;
 let messageText: Phaser.GameObjects.Text;
 
 let keys: Controls;
+
+type Controls = {
+
+    w: Phaser.Input.Keyboard.Key;
+
+    s: Phaser.Input.Keyboard.Key;
+
+    up: Phaser.Input.Keyboard.Key;
+
+    down: Phaser.Input.Keyboard.Key;
+
+};
 
 let leftScore = 0;
 let rightScore = 0;
@@ -178,22 +189,43 @@ function create(this: Phaser.Scene) {
     );
 }
 
-type Controls = {
-
-    w: Phaser.Input.Keyboard.Key;
-
-    s: Phaser.Input.Keyboard.Key;
-
-    up: Phaser.Input.Keyboard.Key;
-
-    down: Phaser.Input.Keyboard.Key;
-
-};
-
 function update() {
 
     if(gameOver)
         return;
+
+    // Left paddle movement
+    if(keys.w.isDown) {
+        leftPaddle.y -= 6;
+    }
+
+    if(keys.s.isDown) {
+        leftPaddle.y += 6;
+    }
+
+
+    // Right paddle movement
+    if(keys.up.isDown) {
+        rightPaddle.y -= 6;
+    }
+
+    if(keys.down.isDown) {
+        rightPaddle.y += 6;
+    }
+
+
+    // Keep paddles inside screen
+    leftPaddle.y = Phaser.Math.Clamp(
+        leftPaddle.y,
+        50,
+        670
+    );
+
+    rightPaddle.y = Phaser.Math.Clamp(
+        rightPaddle.y,
+        50,
+        670
+    );
 
     if(ball.x < 0){
 

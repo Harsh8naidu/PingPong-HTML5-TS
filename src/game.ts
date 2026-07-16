@@ -192,10 +192,9 @@ function update() {
 
     if(ball.x < 0){
 
-    rightScore++;
-    
-    // TODO:
-    //resetBall();
+        rightScore++;
+        
+        resetBall();
 
     }
 
@@ -204,9 +203,7 @@ function update() {
 
         leftScore++;
 
-        // TODO:
-        // resetBall()
-        //resetBall();
+        resetBall();
 
     }
 
@@ -237,5 +234,55 @@ function startGame(){
         300,
         150
     );
+
+}
+
+function resetBall(){
+
+
+    ball.setPosition(
+        640,
+        360
+    );
+
+
+    const body =
+        ball.body as Phaser.Physics.Arcade.Body;
+
+
+    body.setVelocity(
+        0,
+        0
+    );
+
+
+    setTimeout(()=>{
+
+
+        let speedX =
+            Phaser.Math.Between(
+                250,
+                350
+            );
+
+
+        let speedY =
+            Phaser.Math.Between(
+                -150,
+                150
+            );
+
+
+        if(Math.random()<0.5)
+            speedX *= -1;
+
+
+        body.setVelocity(
+            speedX,
+            speedY
+        );
+
+
+    },1000);
 
 }

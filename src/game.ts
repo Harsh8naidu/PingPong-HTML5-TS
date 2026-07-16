@@ -37,3 +37,11 @@ const config: Phaser.Types.Core.GameConfig = {
 
 
 const game = new Phaser.Game(config);
+
+let leftPaddle: Phaser.GameObjects.Rectangle;
+let rightPaddle: Phaser.GameObjects.Rectangle;
+
+let ball: Phaser.GameObjects.Arc;
+
+let scoreText: Phaser.GameObjects.Text;
+let messageText: Phaser.GameObjects.Text;

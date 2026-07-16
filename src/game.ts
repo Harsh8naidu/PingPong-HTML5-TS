@@ -49,6 +49,8 @@ let keys: Controls;
 let leftScore = 0;
 let rightScore = 0;
 
+let gameStarted = false;
+
 function create(this: Phaser.Scene) {
 
 
@@ -155,6 +157,23 @@ function create(this: Phaser.Scene) {
         }
 
     ).setOrigin(0.5);
+
+    messageText = this.add.text(
+        640,
+        360,
+        "PRESS ANY KEY TO PLAY",
+        {
+            fontSize:"30px",
+            color:"#ffffff"
+        }
+
+    ).setOrigin(0.5);
+
+
+    this.input.keyboard!.on(
+        "keydown",
+        startGame
+    );
 }
 
 type Controls = {
@@ -195,4 +214,28 @@ function update() {
     scoreText.setText(
         `${leftScore} : ${rightScore}`
     );
+}
+
+function startGame(){
+
+
+    if(gameStarted)
+        return;
+
+
+    gameStarted = true;
+
+
+    messageText.setVisible(false);
+
+
+    const body =
+        ball.body as Phaser.Physics.Arcade.Body;
+
+
+    body.setVelocity(
+        300,
+        150
+    );
+
 }

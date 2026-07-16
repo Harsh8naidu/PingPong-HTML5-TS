@@ -51,6 +51,8 @@ let rightScore = 0;
 
 let gameStarted = false;
 
+let gameOver = false;
+
 function create(this: Phaser.Scene) {
 
 
@@ -190,6 +192,9 @@ type Controls = {
 
 function update() {
 
+    if(gameOver)
+        return;
+
     if(ball.x < 0){
 
         rightScore++;
@@ -284,5 +289,46 @@ function resetBall(){
 
 
     },1000);
+
+}
+
+function checkGameOver(){
+
+
+    if(leftScore >= 10 || rightScore >=10){
+
+
+        gameOver = true;
+
+
+        const body =
+            ball.body as Phaser.Physics.Arcade.Body;
+
+
+        body.setVelocity(
+            0,
+            0
+        );
+
+
+        messageText.setVisible(true);
+
+
+        if(leftScore >=10){
+
+            messageText.setText(
+                "BLUE WINS!\nGAME OVER"
+            );
+
+        }
+        else{
+
+            messageText.setText(
+                "RED WINS!\nGAME OVER"
+            );
+
+        }
+
+    }
 
 }

@@ -26,7 +26,6 @@ const config: Phaser.Types.Core.GameConfig = {
         }
     },
 
-
     scene: {
         // TODO
         // create

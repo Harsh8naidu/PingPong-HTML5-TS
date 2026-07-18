@@ -64,6 +64,11 @@ let gameStarted = false;
 
 let gameOver = false;
 
+type GameMode = "singleplayer" | "multiplayer";
+
+let gameMode: GameMode = "singleplayer";
+let selectingGameMode = true;
+
 function create(this: Phaser.Scene) {
 
 
@@ -173,19 +178,19 @@ function create(this: Phaser.Scene) {
 
     messageText = this.add.text(
         640,
-        360,
-        "PRESS ANY KEY TO PLAY",
+        300,
+        "PRESS 1 - SINGLE PLAYER\n\nPRESS 2 - TWO PLAYER",
         {
-            fontSize:"30px",
-            color:"#ffffff"
+            fontSize: "30px",
+            color: "#ffffff",
+            align: "center"
         }
-
     ).setOrigin(0.5);
 
 
     this.input.keyboard!.on(
         "keydown",
-        startGame
+        selectGameMode
     );
 }
 
@@ -271,6 +276,27 @@ function startGame(){
         300,
         150
     );
+
+}
+
+function selectGameMode(
+    event: KeyboardEvent
+) {
+
+    if(!selectingGameMode)
+        return;
+
+    if (gameMode === "multiplayer") {
+    // Two player
+    gameMode = "multiplayer";
+    } else {
+        // Single player
+        gameMode = "singleplayer";
+    }
+
+    selectingGameMode = false;
+
+    startGame();
 
 }
 

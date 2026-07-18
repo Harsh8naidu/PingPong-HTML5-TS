@@ -210,8 +210,26 @@ function update() {
 
 
     // Right paddle movement
-    if(keys.up.isDown) {
-        rightPaddle.y -= 6;
+    if(gameMode === "multiplayer") {
+
+        if(keys.up.isDown)
+            rightPaddle.y -= 6;
+
+        if(keys.down.isDown)
+            rightPaddle.y += 6;
+
+    }
+    
+    else {
+
+        const aiSpeed = 4;
+
+        if(ball.y < rightPaddle.y - 10)
+            rightPaddle.y -= aiSpeed;
+
+        if(ball.y > rightPaddle.y + 10)
+            rightPaddle.y += aiSpeed;
+
     }
 
     if(keys.down.isDown) {

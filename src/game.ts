@@ -222,13 +222,15 @@ function update() {
     
     else {
 
-        const aiSpeed = 4;
+        const aiSpeed = 5;
 
-        if(ball.y < rightPaddle.y - 10)
-            rightPaddle.y -= aiSpeed;
+        const targetY = ball.y;
 
-        if(ball.y > rightPaddle.y + 10)
+        if(targetY > rightPaddle.y + 8)
             rightPaddle.y += aiSpeed;
+
+        if(targetY < rightPaddle.y - 8)
+            rightPaddle.y -= aiSpeed;
 
     }
 

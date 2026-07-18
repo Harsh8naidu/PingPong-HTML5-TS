@@ -187,6 +187,21 @@ function create(this: Phaser.Scene) {
         }
     ).setOrigin(0.5);
 
+    const modeText = gameMode === "singleplayer"
+    ? "Single Player"
+    : "Two Player";
+
+
+    this.add.text(
+        640,
+        20,
+        modeText,
+        {
+            fontSize: "18px",
+            color: "#aaaaaa"
+        }
+    ).setOrigin(0.5);
+
 
     this.input.keyboard!.on(
         "keydown",
@@ -286,7 +301,6 @@ function startGame(){
 
 
     messageText.setVisible(false);
-
 
     const body =
         ball.body as Phaser.Physics.Arcade.Body;
